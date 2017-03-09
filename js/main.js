@@ -25,7 +25,7 @@ winner_container.empty()
 reset_button.hide()
 active = true
 player1 = true
-createBoard(3)
+createBoard(9)
 current_player_show()
 
 

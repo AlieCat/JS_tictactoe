@@ -1,3 +1,5 @@
+
+
 var player1 = true,
  	counter = 0,
  	active = true, // Is the game active or not
@@ -143,8 +145,7 @@ $("#reset").click(function(){
 
 
 
-
-function win_condition_check(){ // Another naughty implentation, sorry again. I've used a lot of conditional logic, attempting to scale it down only met with errors and tears.
+function win_condition_check(){ //tion, sorry again. I've used a lot of conditional logic, attempting to scale it down only met with errors and tears.
 
 	// Check the console.logs for the intended results.
 	if (counter === 5 || 7 || 9) { // If it's player one's turn
@@ -285,6 +286,6 @@ function winner_show(){
 }
 
 
-} // Load Game end
+ }// Load Game end
 
 

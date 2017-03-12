@@ -193,14 +193,14 @@ textarea {
     }
 
     .row {
-        width: 620px;
-        height: 110px;
+        width: 100vw;
+        height: 100px;
   
     }
 
     .cell {
-        width: 199px;
-        height: 149px;
+        width: 10%;
+        height: 100px;
         background:rgb(156, 239, 172);
         float: left;
         border: 2px solid black;
@@ -215,8 +215,8 @@ textarea {
     }
     
     .token {
-        width: 140px;
-        height: 120px;
+        width: 10%;
+        height: 10%;
         border-radius: 80px;
         border: 2px solid black;
         display: none;

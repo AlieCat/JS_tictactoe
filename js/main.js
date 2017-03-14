@@ -41,6 +41,7 @@ function createBoard(v){
        row.setAttribute("data-row", i)   
        // Create 9 cells
        for(var j=0; j < v; j++){
+
         cell = document.createElement("div");
      	token = document.createElement("div");
         cell.className = "cell " + "cell" + j;
@@ -48,6 +49,9 @@ function createBoard(v){
         token.className = "token";
         row.appendChild(cell);
         cell.appendChild(token);
+            if(i< (v/3) && j<(v/3)){
+            	cell.className += " BC1BR1";
+    		}
 
        }
 
@@ -93,7 +97,14 @@ $( ".cell" ).click(function() {
 	// Check first if that square is already occupied, in this case alert the user to try another cell
 	if ( $(this).find('div').hasClass( "snowy" ) || $(this).find('div').hasClass( "sox" ) ){
 		alert("Hey! Stop poking me")
-	} else if (active === true){ // user clicks an empty cell
+	} 
+
+	//create logic that only allows user to plac in bc & br
+
+
+
+
+	else if (active === true){ // user clicks an empty cell
 
 		if (player1 === true) {  // I'm breaking the DRY rule here (dont repeat yourself) sorry!
 			token.css("display", "block") // CSS and classes for occupied cell styles
@@ -149,14 +160,16 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 
 	// Check the console.logs for the intended results.
 	if (counter === 5 || 7 || 9) { // If it's player one's turn
-  	  for (var x = 0; x <= (matrix.length -1); x++) { // cycle the matrix rows...
-		for (var y = 0; y <= (matrix[0].length -1); y++) { // ...and cycle the matrix cells
-
+		//for [BR1,BC1]
+  	  for (var x = 0; x <= (3 -1); x++) { // cycle the matrix rows...
+		for (var y = 0; y <= (3-1); y++) { // ...and cycle the matrix cells
+			var BR=1;
+			var BC=1;
 			if ((matrix[x][0]) === "p1" && (matrix[x][1]) === "p1" && (matrix[x][2]) === "p1") { // If our cell has been 'tagged' p1 given x is (e.g 0) then: x0y0, x0y1, x0y2 would mean player one has 3 horizontal cells in a line = victory!
 				if (player1 === true){
 				console.log("horizontal victory")
-				console.log("player1 wins")
-				winner_show()
+				console.log("player1 wins first square")
+				winner_show(1,1)
 				return;
 
 				}
@@ -166,7 +179,7 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 				if (player1 === true){
 				console.log("vertical victory")
 				console.log("player1 wins")
-				winner_show()
+				winner_show(1,1)
 				return;
 				}
 			}
@@ -174,7 +187,7 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 				if (player1 === true){
 				console.log("LtopRdown diagonal")
 				console.log("player1 wins")
-				winner_show()
+				winner_show(1,1)
 				return;
 				}
 			} 
@@ -182,7 +195,7 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 				if (player1 === true){
 				console.log("Rtop Ldown diagonal")
 				console.log("player1 wins")
-				winner_show()
+				winner_show(1,1)
 				return;
 				}
 			}
@@ -258,18 +271,20 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 } // Function win_condition_check END
 
 
-function winner_show(){ 
+function winner_show(BC,BR){ 
 	
 	if (player1 == true) { // a bit confusing, but basically, if the game has finished player 2 has finished 
 		winner_snowy_div = document.createElement("div");
 		winner_snowy_div.setAttribute("id", "winner_snowy")
 	    winner_snowy_div.setAttribute("class", "winner snowy")
-	    winner_snowy_div.innerHTML = "<span>" + 'I Win!' + "</span>"
+	    //change the background color in all cells BC, BR
+	    $( ".BC1BR1" ).css( "background", "red" );
+
 	    winner_container.append(winner_snowy_div)
 		
-		reset_button.show()
-		active = false
-		current_player.hide()
+		//reset_button.show()
+		//active = false
+		//current_player.hide()
 	}
 
 	if (player1 == false) {

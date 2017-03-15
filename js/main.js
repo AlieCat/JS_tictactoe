@@ -1,6 +1,7 @@
 
 
 var player1 = true,
+	turn = true, //should toggle between true and false
  	counter = 0,
  	active = true, // Is the game active or not
 
@@ -49,9 +50,23 @@ function createBoard(v){
         token.className = "token";
         row.appendChild(cell);
         cell.appendChild(token);
-            if(i< (v/3) && j<(v/3)){
-            	cell.className += " BC1BR1";
+            if(i< (v/3)) {
+            	cell.className += " BR1";
     		}
+    		else if(i>=(v/3) && i<(2*(v/3))){
+    			cell.className += " BR2";	
+			}else{
+				cell.className += " BR3";
+			}
+
+            if(j< (v/3)) {
+            	cell.className += " BC1";
+    		}
+    		else if(j>=(v/3) && i<(2*(v/3))){
+    			cell.className += " BC2";	
+			}else{
+				cell.className += " BC3";
+			}
 
        }
 
@@ -63,6 +78,12 @@ function createBoard(v){
     matrix = new Array(3);
 	for (var i = 0; i < matrix.length; i++) {
 	matrix[i] = new Array(3);
+	}
+
+	//create big matrix
+	bigmatrix = new Array(3);
+	for (var i = 0; i < bigmatrix.length; i++) {
+	bigmatrix[i] = new Array(3);
 	}
 
 // Append the div we created at the very start of this function to the HTML generated div.
@@ -99,8 +120,8 @@ $( ".cell" ).click(function() {
 		alert("Hey! Stop poking me")
 	} 
 
-	//create logic that only allows user to plac in bc & br
-
+	//create logic that only allows user to place in bc & br
+	
 
 
 
@@ -278,7 +299,7 @@ function winner_show(BC,BR){
 		winner_snowy_div.setAttribute("id", "winner_snowy")
 	    winner_snowy_div.setAttribute("class", "winner snowy")
 	    //change the background color in all cells BC, BR
-	    $( ".BC1BR1" ).css( "background", "red" );
+	    $( ".BC1.BR1" ).css( "background", "red" );
 
 	    winner_container.append(winner_snowy_div)
 		

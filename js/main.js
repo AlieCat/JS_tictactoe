@@ -62,7 +62,7 @@ function createBoard(v){
             if(j< (v/3)) {
             	cell.className += " BC1";
     		}
-    		else if(j>=(v/3) && i<(2*(v/3))){
+    		else if(j>=(v/3) && j<(2*(v/3))){
     			cell.className += " BC2";	
 			}else{
 				cell.className += " BC3";
@@ -88,10 +88,11 @@ function createBoard(v){
 
 // Append the div we created at the very start of this function to the HTML generated div.
 // Add the "my turn" content that sits next to the image of the cat
- winner_container.append(current_player_div)
- current_player = $(".current_player")
- current_player.html("<span>My Turn!</span>")
 
+ winner_container.append(current_player_div)
+ current_player = $(".current_player")/*
+ current_player.html("<span>My Turn!</span>")
+*/
 } //createBoard END
 
 // Check which player's turn it is, then show the relevant image
@@ -107,6 +108,27 @@ function current_player_show(){
 
 }
 
+//create a function that returns a little row or little collumn value
+function little(data-row,data-cell){
+	if (data-row==0 || data-row==3 || data-row==6){
+		var LR = 1;
+	}
+	else if(data-row==1 || data-row==4 || data-row==7){
+		var LR = 2;
+	}else{var LR=3;}
+	if (data-cell==0 || data-cell==3 || data-cell==6){
+		var LC = 1;
+	}
+	else if(data-cell==1 || data-cell==4 || data-cell==7){
+		var LC = 2;
+	}else{var LC=3;}
+	var LRLC=[LR,LC]
+	return LRLC;
+
+}
+
+
+
 // When a user clicks on a cell
 $( ".cell" ).click(function() {
 
@@ -121,7 +143,25 @@ $( ".cell" ).click(function() {
 	} 
 
 	//create logic that only allows user to place in bc & br
-	
+	if(player1 == true){
+		var P1BRBC= little(clickedRow, clickedCell);
+	}else if(player1 == false){
+		var P2BRBC= little(clickedRow, clickedCell);	
+	}else{console.log('Too many players?')}
+
+	if (BRBC==undefined){
+		console.log('first round you can go anywhere');
+	}else{
+		if(player1==true){
+				if(P2BRBC[0] == 1 && clickedRow>2){
+					alert("Hey! Stop poking me")
+				}else if(P2BRBC[0] == 2 && clickedRow<3 && clickedRow>5){
+					alert("Hey! Stop poking me")
+				}else if(P2BRBC[0] == 3 && clickedRow<6){
+					alert("Hey! Stop poking me")
+				} else{console.log('valid entry')}
+		}
+	}
 
 
 

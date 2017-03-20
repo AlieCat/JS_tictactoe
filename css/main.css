@@ -201,12 +201,21 @@ textarea {
     .cell {
         width: 10%;
         height: 100px;
-        background:rgb(156, 239, 172);
+        /*background:rgb(156, 239, 172);*/
         float: left;
         border: 2px solid black;
 
     }
-
+    /*change color of every other cell*/
+    .BR1.BC1{background:#42a7f4}
+    .BR1.BC2{background:#a089af}
+    .BR1.BC3{background:#42a7f4}
+    .BR2.BC1{background:#a089af}
+    .BR2.BC2{background:#42a7f4}
+    .BR2.BC3{background:#a089af}
+    .BR3.BC1{background:#42a7f4}
+    .BR3.BC2{background:#a089af}
+    .BR3.BC3{background:#42a7f4}
 
     .cell:hover {
         

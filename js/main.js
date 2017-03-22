@@ -39,7 +39,8 @@ function createBoard(v){
     for (var i = 0; i < v; i++){
        row = document.createElement("div");
        row.className = "row " + "row" + i;
-       row.setAttribute("data-row", i)   
+       row.setAttribute("data-row", i)
+
        // Create 9 cells
        for(var j=0; j < v; j++){
 
@@ -109,17 +110,17 @@ function current_player_show(){
 }
 
 //create a function that returns a little row or little collumn value
-function little(data-row,data-cell){
-	if (data-row==0 || data-row==3 || data-row==6){
+function little(dataRow,dataCell){
+	if (dataRow==0 || dataRow==3 || dataRow==6){
 		var LR = 1;
 	}
-	else if(data-row==1 || data-row==4 || data-row==7){
+	else if(dataRow==1 || dataRow==4 || dataRow==7){
 		var LR = 2;
 	}else{var LR=3;}
-	if (data-cell==0 || data-cell==3 || data-cell==6){
+	if (dataCell==0 || dataCell==3 || dataCell==6){
 		var LC = 1;
 	}
-	else if(data-cell==1 || data-cell==4 || data-cell==7){
+	else if(dataCell==1 || dataCell==4 || dataCell==7){
 		var LC = 2;
 	}else{var LC=3;}
 	var LRLC=[LR,LC]
@@ -149,7 +150,7 @@ $( ".cell" ).click(function() {
 		var P2BRBC= little(clickedRow, clickedCell);	
 	}else{console.log('Too many players?')}
 
-	if (BRBC==undefined){
+	if (typeof BRBC === 'undefined' || !BRBC){
 		console.log('first round you can go anywhere');
 	}else{
 		if(player1==true){
@@ -165,7 +166,7 @@ $( ".cell" ).click(function() {
 
 
 
-	else if (active === true){ // user clicks an empty cell
+	if (active === true){ // user clicks an empty cell
 
 		if (player1 === true) {  // I'm breaking the DRY rule here (dont repeat yourself) sorry!
 			token.css("display", "block") // CSS and classes for occupied cell styles

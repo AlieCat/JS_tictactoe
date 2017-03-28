@@ -76,15 +76,18 @@ function createBoard(v){
     // Create the matrix - Our "back-end" logic that connects to the front-end grid we created above.
     // We work with the matrix to deal wth the computations and conditional logic that allows our
     // game to come alive.
-    matrix = new Array(3);
+    matrix = new Array(9);
 	for (var i = 0; i < matrix.length; i++) {
-	matrix[i] = new Array(3);
+		matrix[i] = new Array(9);
 	}
-
 	//create big matrix
 	bigmatrix = new Array(3);
+	littlematrix = new Array(3);
 	for (var i = 0; i < bigmatrix.length; i++) {
-	bigmatrix[i] = new Array(3);
+		bigmatrix[i] = new Array(3);
+		for (var i = 0; i < littlematrix.length; i++) {
+		littlematrix[i] = new Array(3);
+		}
 	}
 
 // Append the div we created at the very start of this function to the HTML generated div.
@@ -137,6 +140,8 @@ $( ".cell" ).click(function() {
 	clickedRow = $(this).parent().attr('data-row') 
 	clickedCell = $(this).attr("data-cell")
 	token = $(this).find('div')
+	P1BRBC = [0,0]
+	valid = true
 
 	// Check first if that square is already occupied, in this case alert the user to try another cell
 	if ( $(this).find('div').hasClass( "snowy" ) || $(this).find('div').hasClass( "sox" ) ){
@@ -146,27 +151,68 @@ $( ".cell" ).click(function() {
 	//create logic that only allows user to place in bc & br
 	if(player1 == true){
 		var P1BRBC= little(clickedRow, clickedCell);
+		console.log('player1')
 	}else if(player1 == false){
-		var P2BRBC= little(clickedRow, clickedCell);	
+		var P2BRBC= little(clickedRow, clickedCell);
+		console.log('player2')	
 	}else{console.log('Too many players?')}
 
-	if (typeof BRBC === 'undefined' || !BRBC){
+	if (typeof P2BRBC === 'undefined' || !P2BRBC){
 		console.log('first round you can go anywhere');
 	}else{
 		if(player1==true){
-				if(P2BRBC[0] == 1 && clickedRow>2){
-					alert("Hey! Stop poking me")
-				}else if(P2BRBC[0] == 2 && clickedRow<3 && clickedRow>5){
-					alert("Hey! Stop poking me")
-				}else if(P2BRBC[0] == 3 && clickedRow<6){
-					alert("Hey! Stop poking me")
-				} else{console.log('valid entry')}
+				if(P2BRBC[0] == 0 && clickedRow>2){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P2BRBC[0] == 1 && clickedRow<3 && clickedRow>5){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P2BRBC[0] == 2 && clickedRow<6){
+					alert("Hey! Stop poking me");
+					valid=false;
+				} 
+				//check for valid BC
+
+
+
+
+				else{
+					valid=true;
+					console.log('valid entry');
+				}
+		}
+		else if(player1==false){
+				if(P1BRBC[0] == 0 && clickedRow>2){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P1BRBC[0] == 1 && clickedRow<3 && clickedRow>5){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P1BRBC[0] == 2 && clickedRow<6){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P1BRBC[1] == 0 && clickedCell>2){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P1BRBC[1] == 1 && clickedCell<3 && clickedCell>5){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}else if(P1BRBC[1] == 2 && clickedCell<6){
+					alert("Hey! Stop poking me");
+					valid=false;
+				}
+				else{
+					console.log(P1BRBC[0]);
+					console.log(P1BRBC[1]);
+					valid=true;
+					console.log('valid entry');
+				}
 		}
 	}
 
 
 
-	if (active === true){ // user clicks an empty cell
+	if (active === true && valid===true){ // user clicks an empty cell
 
 		if (player1 === true) {  // I'm breaking the DRY rule here (dont repeat yourself) sorry!
 			token.css("display", "block") // CSS and classes for occupied cell styles
@@ -174,8 +220,11 @@ $( ".cell" ).click(function() {
 	  		token.css("border", "none")
 	  		token.addClass("expandOpen")
 
+	  		console.log(clickedRow)
+	  		console.log(clickedCell)
 	  		matrix[clickedRow][clickedCell] = "p1" // to show this matrix cell is now occupied
-	  		
+	  		console.log(matrix[clickedRow][clickedCell])
+
 	  		counter++ // add one to the turn counter
 	  		win_condition_check() // check if our player has won
 	  		player1 = false; // Set variable to player 2
@@ -186,6 +235,9 @@ $( ".cell" ).click(function() {
 			token.css("display", "block")
 	  		token.addClass("sox")
 	  		token.addClass("expandOpen")
+
+	  		console.log(clickedRow)
+	  		console.log(clickedCell)
 	  		matrix[clickedRow][clickedCell] = "p2"
 	  		
 	  		counter++

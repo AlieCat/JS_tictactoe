@@ -114,21 +114,10 @@ function current_player_show(){
 
 //create a function that returns a little row or little collumn value
 function little(dataRow,dataCell){
-	if (dataRow==0 || dataRow==3 || dataRow==6){
-		var LR = 1;
-	}
-	else if(dataRow==1 || dataRow==4 || dataRow==7){
-		var LR = 2;
-	}else{var LR=3;}
-	if (dataCell==0 || dataCell==3 || dataCell==6){
-		var LC = 1;
-	}
-	else if(dataCell==1 || dataCell==4 || dataCell==7){
-		var LC = 2;
-	}else{var LC=3;}
+	var LR = (dataRow)%3;
+	var LC = (dataCell)%3;
 	var LRLC=[LR,LC]
 	return LRLC;
-
 }
 
 
@@ -140,8 +129,9 @@ $( ".cell" ).click(function() {
 	clickedRow = $(this).parent().attr('data-row') 
 	clickedCell = $(this).attr("data-cell")
 	token = $(this).find('div')
-	P1BRBC = [0,0]
-	valid = true
+	
+	valid = true;
+	
 
 	// Check first if that square is already occupied, in this case alert the user to try another cell
 	if ( $(this).find('div').hasClass( "snowy" ) || $(this).find('div').hasClass( "sox" ) ){
@@ -149,61 +139,69 @@ $( ".cell" ).click(function() {
 	} 
 
 	//create logic that only allows user to place in bc & br
-	if(player1 == true){
-		var P1BRBC= little(clickedRow, clickedCell);
-		console.log('player1')
+	if(player1 == true || player1 === 'undefined'){
+		P1BRBC= little(clickedRow, clickedCell);
+		console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 	}else if(player1 == false){
-		var P2BRBC= little(clickedRow, clickedCell);
+		P2BRBC= little(clickedRow, clickedCell);
 		console.log('player2')	
 	}else{console.log('Too many players?')}
 
-	if (typeof P2BRBC === 'undefined' || !P2BRBC){
+	if (typeof P2BRBC === 'undefined'){
 		console.log('first round you can go anywhere');
 	}else{
 		if(player1==true){
-				if(P2BRBC[0] == 0 && clickedRow>2){
+				alert('player2 '+'row '+P2BRBC[0]+'column '+P2BRBC[1]);
+				if(P2BRBC[0] == 0 && clickedRow>3){
+					alert("Hey! Stop poking me you chose big row 2 or 3 and p2 chose little row 1");
+					valid=false;
+				}else if(P2BRBC[0] == 1 && clickedRow<2 && clickedRow>6){
+					alert("Hey! Stop poking me you clicked big Row 1 or 3 and p1 chose little row 1");
+					valid=false;
+				}else if(P2BRBC[0] == 2 && clickedRow<5){
 					alert("Hey! Stop poking me");
 					valid=false;
-				}else if(P2BRBC[0] == 1 && clickedRow<3 && clickedRow>5){
+				}else if(P2BRBC[1] == 0 && clickedCell>3){
 					alert("Hey! Stop poking me");
 					valid=false;
-				}else if(P2BRBC[0] == 2 && clickedRow<6){
+				}else if(P2BRBC[1] == 1 && clickedCell<2 && clickedCell>6){
 					alert("Hey! Stop poking me");
-					valid=false;
-				} 
-				//check for valid BC
-
-
-
-
-				else{
-					valid=true;
-					console.log('valid entry');
-				}
-		}
-		else if(player1==false){
-				if(P1BRBC[0] == 0 && clickedRow>2){
-					alert("Hey! Stop poking me");
-					valid=false;
-				}else if(P1BRBC[0] == 1 && clickedRow<3 && clickedRow>5){
-					alert("Hey! Stop poking me");
-					valid=false;
-				}else if(P1BRBC[0] == 2 && clickedRow<6){
-					alert("Hey! Stop poking me");
-					valid=false;
-				}else if(P1BRBC[1] == 0 && clickedCell>2){
-					alert("Hey! Stop poking me");
-					valid=false;
-				}else if(P1BRBC[1] == 1 && clickedCell<3 && clickedCell>5){
-					alert("Hey! Stop poking me");
-					valid=false;
-				}else if(P1BRBC[1] == 2 && clickedCell<6){
+					valid=false
+				}else if(P2BRBC[1] == 2 && clickedCell<5){
 					alert("Hey! Stop poking me");
 					valid=false;
 				}
 				else{
 					console.log(P1BRBC[0]);
 					console.log(P1BRBC[1]);
+					valid=true;
+					console.log('valid entry');
+				}
+		}
+		else if(player1==false){
+				alert('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
+				if(P1BRBC[0] == 0 && clickedRow>2){
+					alert("Hey! Stop poking me p1 chose little row 0");
+					valid=false;
+				}else if(P1BRBC[0] == 1 && clickedRow<3 && clickedRow>5){
+					alert("Hey! Stop poking me p1 chose little row 1");
+					valid=false;
+				}else if(P1BRBC[0] == 2 && clickedRow<6){
+					alert("Hey! Stop poking me p1 chose little row 2");
+					valid=false;
+				}else if(P1BRBC[1] == 0 && clickedCell>2){
+					alert("Hey! Stop poking me little collumn " + P1BRBC[1]);
+					valid=false;
+				}else if(P1BRBC[1] == 1 && clickedCell<3 && clickedCell>5){
+					alert("Hey! Stop poking me lc2");
+					valid=false;
+				}else if(P1BRBC[1] == 2 && clickedCell<6){
+					alert("Hey! Stop poking me lc3");
+					valid=false;
+				}
+				else{
+					console.log('row '+ P1BRBC[0]);
+					console.log('column '+P1BRBC[1]);
 					valid=true;
 					console.log('valid entry');
 				}

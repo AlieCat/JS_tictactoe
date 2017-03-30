@@ -367,18 +367,7 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 	} // End player 2 check
 
 	// In the case of a DRAW. We announce this and allow the users to play again
-	if (counter >= 9 && active == true){
 
-	
-		reset_button.show()
-		active = false	
-		current_player.hide()
-		winner_none = document.createElement("div");
-		winner_none.setAttribute("id", "winner_none")
-	    winner_none.setAttribute("class", "winner none")
-	    winner_none.innerHTML = "<span>" + 'It\'s a draw!' + "</span>"
-	    winner_container.append(winner_none)
-	}
 
 } // Function win_condition_check END
 

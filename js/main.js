@@ -81,14 +81,9 @@ function createBoard(v){
 		matrix[i] = new Array(9);
 	}
 	//create big matrix
-	bigmatrix = new Array(3);
-	littlematrix = new Array(3);
-	for (var i = 0; i < bigmatrix.length; i++) {
-		bigmatrix[i] = new Array(3);
-		for (var i = 0; i < littlematrix.length; i++) {
-		littlematrix[i] = new Array(3);
-		}
-	}
+		
+	//create little matrix
+
 
 // Append the div we created at the very start of this function to the HTML generated div.
 // Add the "my turn" content that sits next to the image of the cat
@@ -141,69 +136,69 @@ $( ".cell" ).click(function() {
 	//create logic that only allows user to place in bc & br
 	if(player1 == true || player1 === 'undefined'){
 		P1BRBC= little(clickedRow, clickedCell);
-		console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
+		//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 	}else if(player1 == false){
 		P2BRBC= little(clickedRow, clickedCell);
-		console.log('player2')	
+		//console.log('player2')	
 	}else{console.log('Too many players?')}
 
 	if (typeof P2BRBC === 'undefined'){
-		console.log('first round you can go anywhere');
+		//console.log('first round you can go anywhere');
 	}else{
 		if(player1==true){
-				console.log('player2 '+'row '+P2BRBC[0]+'column '+P2BRBC[1]);
+				//console.log('player2 '+'row '+P2BRBC[0]+'column '+P2BRBC[1]);
 				if(P2BRBC[0] == 0 && clickedRow>2){
-					console.log("Hey! Stop poking me you chose big row 2 or 3 and p2 chose little row 1");
+					//console.log("Hey! Stop poking me you chose big row 2 or 3 and p2 chose little row 1");
 					valid=false;
 				}else if(P2BRBC[0] == 1 && (clickedRow<3  ||  clickedRow>5)){
-					console.log("Hey! Stop poking me you clicked big Row 1 or 3 and p1 chose little row 1");
+					//console.log("Hey! Stop poking me you clicked big Row 1 or 3 and p1 chose little row 1");
 					valid=false;
 				}else if(P2BRBC[0] == 2 && clickedRow<5){
-					console.log("Hey! Stop poking me");
+					//console.log("Hey! Stop poking me");
 					valid=false;
 				}else if(P2BRBC[1] == 0 && clickedCell>3){
-					console.log("Hey! Stop poking me");
+					//console.log("Hey! Stop poking me");
 					valid=false;
 				}else if(P2BRBC[1] == 1 && (clickedCell<3  ||  clickedCell>5)){
-					console.log("Hey! Stop poking me");
+					//console.log("Hey! Stop poking me");
 					valid=false
 				}else if(P2BRBC[1] == 2 && clickedCell<5){
-					console.log("Hey! Stop poking me");
+					//console.log("Hey! Stop poking me");
 					valid=false;
 				}
 				else{
-					console.log(P1BRBC[0]);
-					console.log(P1BRBC[1]);
+					//console.log(P2BRBC[0]);
+					//console.log(P2BRBC[1]);
 					valid=true;
-					console.log('valid entry');
+					//console.log('valid entry');
 				}
 		}
 		else if(player1==false){
-				console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
+				//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 				if(P1BRBC[0] == 0 && clickedRow>2){
-					console.log("Hey! Stop poking me p1 chose little row 0");
+					//console.log("Hey! Stop poking me p1 chose little row 0");
 					valid=false;
 				}else if(P1BRBC[0] == 1 && (clickedRow<3  ||  clickedRow>5)){
-					console.log("Hey! Stop poking me p1 chose little row 1");
+					//console.log("Hey! Stop poking me p1 chose little row 1");
 					valid=false;
 				}else if(P1BRBC[0] == 2 && clickedRow<6){
-					console.log("Hey! Stop poking me p1 chose little row 2");
+					//console.log("Hey! Stop poking me p1 chose little row 2");
 					valid=false;
 				}else if(P1BRBC[1] == 0 && clickedCell>2){
-					console.log("Hey! Stop poking me little collumn " + P1BRBC[1]);
+					//console.log("Hey! Stop poking me little collumn " + P1BRBC[1]);
 					valid=false;
 				}else if(P1BRBC[1] == 1 && (clickedCell<3  ||  clickedCell>5)){
-					console.log("Hey! Stop poking me lc2");
+					//console.log("Hey! Stop poking me lc2");
 					valid=false;
 				}else if(P1BRBC[1] == 2 && clickedCell<6){
-					console.log("Hey! Stop poking me lc3");
+					//console.log("Hey! Stop poking me lc3");
 					valid=false;
 				}
 				else{
-					console.log('row '+ P1BRBC[0]);
-					console.log('column '+P1BRBC[1]);
+					//console.log('row '+ P1BRBC[0]);
+					//console.log('column '+P1BRBC[1]);
 					valid=true;
-					console.log('valid entry');
+					//console.log('valid entry');
 				}
 		}
 	}
@@ -217,14 +212,19 @@ $( ".cell" ).click(function() {
 	  		token.addClass("snowy")
 	  		token.css("border", "none")
 	  		token.addClass("expandOpen")
-
-	  		console.log(clickedRow)
-	  		console.log(clickedCell)
 	  		matrix[clickedRow][clickedCell] = "p1" // to show this matrix cell is now occupied
-	  		console.log(matrix[clickedRow][clickedCell])
+
+	  		//lets also fill in little matrix
+	  		//littlematrix[clickedRow][clickedCell] = "p1"
+	  		
 
 	  		counter++ // add one to the turn counter
-	  		win_condition_check() // check if our player has won
+	  		if (typeof P2BRBC !== 'undefined'){
+	  			console.log("BR "+P2BRBC[0]+"BC "+P2BRBC[1])
+	  			win_condition_check((P2BRBC[0]+1),(P2BRBC[1]+1)) // check if our player has won
+	  		}
+	  		
+	  		
 	  		player1 = false; // Set variable to player 2
 	  		
 		}
@@ -234,12 +234,15 @@ $( ".cell" ).click(function() {
 	  		token.addClass("sox")
 	  		token.addClass("expandOpen")
 
-	  		console.log(clickedRow)
-	  		console.log(clickedCell)
+	  		//console.log(clickedRow)
+	  		//console.log(clickedCell)
 	  		matrix[clickedRow][clickedCell] = "p2"
 	  		
 	  		counter++
-	  		win_condition_check()
+	  		if (typeof P1BRBC !== 'undefined'){
+	  			console.log("BR "+P1BRBC[0]+"BC "+P1BRBC[1])
+	  			win_condition_check((P1BRBC[0]+1),(P1BRBC[1]+1)) // check if our player has won
+	  		}
 	  		player1 = true
 
 	  		
@@ -268,94 +271,124 @@ $("#reset").click(function(){
 
 
 
-function win_condition_check(){ //tion, sorry again. I've used a lot of conditional logic, attempting to scale it down only met with errors and tears.
-
+function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of conditional logic, attempting to scale it down only met with errors and tears.
+	//console.log("big row "+BR+" big column "+BC)
 	// Check the console.logs for the intended results.
-	if (counter === 5 || 7 || 9) { // If it's player one's turn
-		//for [BR1,BC1]
-  	  for (var x = 0; x <= (3 -1); x++) { // cycle the matrix rows...
-		for (var y = 0; y <= (3-1); y++) { // ...and cycle the matrix cells
-			var BR=1;
-			var BC=1;
-			if ((matrix[x][0]) === "p1" && (matrix[x][1]) === "p1" && (matrix[x][2]) === "p1") { // If our cell has been 'tagged' p1 given x is (e.g 0) then: x0y0, x0y1, x0y2 would mean player one has 3 horizontal cells in a line = victory!
-				if (player1 === true){
-				console.log("horizontal victory")
-				console.log("player1 wins first square")
-				winner_show(1,1)
-				return;
+	if ((counter%2)===1) { // If it's player one's turn
+		//Check in only BR,BC
+		//Check in all the Bigger squares
+		little_check(((BR-1)*3),((BC-1)*3));
+		//little_check(0,3);
+		//little_check(0,6);
+		//little_check(3,0);
+		//little_check(3,3);
+		//little_check(3,6);
+		//little_check(6,0);
+		//little_check(6,3);
+		//little_check(6,6);
 
-				}
-			}
-
-			else if	((matrix[0][y]) === "p1" && (matrix[1][y]) === "p1" && (matrix[2][y]) === "p1") { // Repeated for other conditions
-				if (player1 === true){
-				console.log("vertical victory")
-				console.log("player1 wins")
-				winner_show(1,1)
-				return;
-				}
-			}
-			else if ((matrix[0][0]) === "p1" && (matrix[1][1]) === "p1" && (matrix[2][2]) === "p1") {
-				if (player1 === true){
-				console.log("LtopRdown diagonal")
-				console.log("player1 wins")
-				winner_show(1,1)
-				return;
-				}
-			} 
-			else if	((matrix[0][2]) === "p1" && (matrix[1][1]) === "p1" && (matrix[2][0]) === "p1") {	
-				if (player1 === true){
-				console.log("Rtop Ldown diagonal")
-				console.log("player1 wins")
-				winner_show(1,1)
-				return;
-				}
-			}
+		//
+		function little_check(count,count2){
 			
-		}
+			//console.log("count "+ count+"count2 "+count2);			
+  	  		for ( var x=count; x <= (count+2); x++) { // cycle the matrix rows...
+  	  			for (var y=count2; y <= (count2+2); y++) { // ...and cycle the matrix cells
+					//var BR=1;
+
+					//console.log("matrx[x] "+ x+"martix[y] "+y);
+					if ((matrix[x][(count2+0)]) === "p1" && (matrix[x][(count2+1)]) === "p1" && (matrix[x][(count2+2)]) === "p1") { // If our cell has been 'tagged' p1 given x is (e.g 0) then: x0y0, x0y1, x0y2 would mean player one has 3 horizontal cells in a line = victory!
+						if (player1 === true){
+						console.log("horizontal victory")
+						console.log("player1 wins square row "+BR+ "column "+BC )
+						winner_show(BR,BC)
+						return;
+
+						}
+					} 
+					else if	(   (matrix[(count+0)][y]) === "p1" && (matrix[(count+1)][y]) === "p1" && (matrix[(count+2)][y]) === "p1") { // Repeated for other conditions
+						if (player1 === true){
+						console.log("vertical victory")
+						console.log("player1 wins")
+						winner_show(BR,BC)
+						return;
+						}
+					}
+					else if ((matrix[(count+0)][(count2+0)]) === "p1" && (matrix[(count+1)][(count2+1)]) === "p1" && (matrix[(count+2)][(count2+2)]) === "p1") {
+						if (player1 === true){
+						console.log("LtopRdown diagonal")
+						console.log("player1 wins")
+						winner_show(BR,BC)
+						return;
+						}
+					} 
+					else if	(  (matrix[(count+0)][(count2+2)]) === "p1" && (matrix[(count+1)][(count2+1)]) === "p1" && (matrix[(count+2)][(count2+0)]) === "p1") {	
+						if (player1 === true){
+						console.log("Rtop Ldown diagonal")
+						console.log("player1 wins")
+						winner_show(BR,BC)
+						return;
+						}
+					}
+				}
+			}
 	
-	  }  
+	  	}  
 	} // End player one check
 
 
-	if (counter === 6 || 8 ) {	// Now for player 2
-	  	  for (var x = 0; x <= (matrix.length -1); x++) {
-			for (var y = 0; y <= (matrix[0].length -1); y++) {
+	if ((counter%2)===0) {	// Now for player 2
 
-				if ((matrix[x][0]) === "p2" && (matrix[x][1]) === "p2" && (matrix[x][2]) === "p2") {
+		little_check1(((BR-1)*3),((BC-1)*3));
+		//little_check1(0,3);
+		//little_check1(0,6);
+		//little_check1(3,0);
+		//little_check1(3,3);
+		//little_check1(3,6);
+		//little_check1(6,0);
+		//little_check1(6,3);
+		//little_check1(6,6);
+
+		//
+		function little_check1(count,count2){
+
+
+	  	  for (var x = count; x <= (count+2); x++) {
+			for (var y = count2; y <= (count2+2); y++) {
+
+				if ((matrix[x][(count2+0)]) === "p2" && (matrix[x][(count2+1)]) === "p2" && (matrix[x][(count2+2)]) === "p2") {
 				
-				console.log(player1)
+				//console.log(player1)
 
 				if (player1== false) {
 					console.log("horizontal victory")
 					console.log("player2 wins")
-					winner_show()
+					winner_show(BR,BC)
 					return;
 					}
 				}
 
-				else if	((matrix[0][y]) === "p2" && (matrix[1][y]) === "p2" && (matrix[2][y]) === "p2") {
+				else if	((matrix[(count+0)][y]) === "p2" && (matrix[(count+1)][y]) === "p2" && (matrix[(count+2)][y]) === "p2") {
 				if (player1== false) {
 					console.log("vertical victory")
 					console.log("player2 wins")
-					winner_show()
+					winner_show(BR,BC)
 					return;
 					}
 				}
-				else if ((matrix[0][0]) === "p2" && (matrix[1][1]) === "p2" && (matrix[2][2]) === "p2") {
+				else if ((matrix[(count+0)][(count2+0)]) === "p2" && (matrix[(count+1)][(count2+1)]) === "p2" && (matrix[(count+2)][(count2+2)]) === "p2") {
 				if (player1== false) {	
 					console.log("LtopRdown diagonal")
 					console.log("player2 wins")
-					winner_show()
+					winner_show(BR,BC)
 					return;
 					}	
 				}
-				
-				else if	((matrix[0][2]) === "p2" && (matrix[1][1]) === "p2" && (matrix[2][0]) === "p2") {	
+			
+				else if	((matrix[(count+0)][(count2+2)]) === "p2" && (matrix[(count+1)][(count2+1)]) === "p2" && (matrix[(count+2)][(count2+0)]) === "p2") {	
 					if (player1== false) {
 					console.log("Rtop Ldown diagonal")
 					console.log("player2 wins")
-					winner_show()
+					winner_show(BR,BC)
 					return;
 					}
 				}
@@ -363,6 +396,7 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 				
 			}
 	
+		}
 		}	
 	} // End player 2 check
 
@@ -372,14 +406,14 @@ function win_condition_check(){ //tion, sorry again. I've used a lot of conditio
 } // Function win_condition_check END
 
 
-function winner_show(BC,BR){ 
+function winner_show(BR,BC){ 
 	
 	if (player1 == true) { // a bit confusing, but basically, if the game has finished player 2 has finished 
 		winner_snowy_div = document.createElement("div");
 		winner_snowy_div.setAttribute("id", "winner_snowy")
 	    winner_snowy_div.setAttribute("class", "winner snowy")
 	    //change the background color in all cells BC, BR
-	    $( ".BC1.BR1" ).css( "background", "red" );
+	    $( ".BC"+BC+".BR"+BR ).css( "background", "pink" );
 
 	    winner_container.append(winner_snowy_div)
 		
@@ -394,10 +428,11 @@ function winner_show(BC,BR){
 	    winner_sox_div.setAttribute("class", "winner sox")
 	    winner_sox_div.innerHTML = "<span>" + 'I Win!' + "</span>"
 	    winner_container.append(winner_sox_div)
-	
-		reset_button.show()
-		active = false	
-		current_player.hide()	
+		
+		$( ".BC"+BC+".BR"+BR ).css( "background", "sandybrown" );
+		//reset_button.show()
+		//active = false	
+		//current_player.hide()	
 	}
 }
 

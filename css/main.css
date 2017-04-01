@@ -182,6 +182,7 @@ textarea {
         float: right;
         width: 208px;
         height: 145px;
+        display:none;
     }
 
     .winner > span {

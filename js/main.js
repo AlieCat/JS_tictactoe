@@ -144,7 +144,8 @@ $( ".cell" ).click(function() {
 
 	if (typeof P2BRBC === 'undefined'){
 		//console.log('first round you can go anywhere');
-	}else{
+	}//else if( entire BRBC is filled){ you can go anywhere}
+	else{
 		if(player1==true){
 				//console.log('player2 '+'row '+P2BRBC[0]+'column '+P2BRBC[1]);
 				if(P2BRBC[0] == 0 && clickedRow>2){
@@ -221,7 +222,9 @@ $( ".cell" ).click(function() {
 	  		counter++ // add one to the turn counter
 	  		if (typeof P2BRBC !== 'undefined'){
 	  			console.log("BR "+P2BRBC[0]+"BC "+P2BRBC[1])
+	  			//check if other player has already won the square
 	  			win_condition_check((P2BRBC[0]+1),(P2BRBC[1]+1)) // check if our player has won
+
 	  		}
 	  		
 	  		
@@ -401,6 +404,8 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 	} // End player 2 check
 
 	// In the case of a DRAW. We announce this and allow the users to play again
+	// check all 9 space
+
 
 
 } // Function win_condition_check END

@@ -98,7 +98,7 @@ textarea {
    ========================================================================== */
     
     body {
-        margin: 20px 50px;
+        margin: 5px 5px;
         background: rgb(219, 232, 240);
     }
 
@@ -196,13 +196,13 @@ textarea {
 
     .row {
         width: 100vw;
-        height: 100px;
+        height: 10vh;
   
     }
 
     .cell {
-        width: 10%;
-        height: 100px;
+        width: 10vw;
+        height: 10vw;
         /*background:rgb(156, 239, 172);*/
         float: left;
         border: 2px solid black;
@@ -226,18 +226,18 @@ textarea {
     }
     
     .token {
-        width: 10%;
-        height: 10%;
+        width: 100%;
+        height: 100%;
         border-radius: 80px;
         border: 2px solid black;
         display: none;
         background-size: 20px 20px;
-        margin: 10px 30px;
+        margin: 0px 0px;
     }
 
     .snowy {
         
-        background-image: url('../img/snowy.png'), url('../img/pink-cross.png');
+        background-image: url('../img/snowy.png');
         background-size: 100px 100px, 150px 150px;
         background-repeat: no-repeat;
         background-position: 30% 30%, center; 
@@ -353,6 +353,7 @@ textarea {
     }
 
     .credit {
+        display:none;
 
     }
 

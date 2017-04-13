@@ -83,6 +83,11 @@ function createBoard(v){
 	//create big matrix
 		
 	//create little matrix
+	//for storing win conditions
+	littlematrix = new Array(3);
+	for (var i = 0; i < littlematrix.length; i++) {
+		littlematrix[i] = new Array(3);
+	}
 
 
 // Append the div we created at the very start of this function to the HTML generated div.
@@ -214,16 +219,21 @@ $( ".cell" ).click(function() {
 	  		token.css("border", "none")
 	  		token.addClass("expandOpen")
 	  		matrix[clickedRow][clickedCell] = "p1" // to show this matrix cell is now occupied
-
-	  		//lets also fill in little matrix
-	  		//littlematrix[clickedRow][clickedCell] = "p1"
 	  		
 
 	  		counter++ // add one to the turn counter
 	  		if (typeof P2BRBC !== 'undefined'){
-	  			console.log("BR "+P2BRBC[0]+"BC "+P2BRBC[1])
+	  			//console.log("BR "+P2BRBC[0]+"BC "+P2BRBC[1])
 	  			//check if other player has already won the square
-	  			win_condition_check((P2BRBC[0]+1),(P2BRBC[1]+1)) // check if our player has won
+	  			if (littlematrix[P2BRBC[0]][P2BRBC[1]] !== "p2") {
+	  			//console.log(littlematrix)
+	  			win_condition_check((P2BRBC[0]+1),(P2BRBC[1]+1)); // check if our player has won
+	  			}
+	  			else{
+	  			//check if player overturns square
+	  			console.log("overturn check p1")
+	  			overturn_check(P2BRBC[0]+1),(P2BRBC[1]+1,"p1")
+	  			}	
 
 	  		}
 	  		
@@ -243,8 +253,15 @@ $( ".cell" ).click(function() {
 	  		
 	  		counter++
 	  		if (typeof P1BRBC !== 'undefined'){
-	  			console.log("BR "+P1BRBC[0]+"BC "+P1BRBC[1])
-	  			win_condition_check((P1BRBC[0]+1),(P1BRBC[1]+1)) // check if our player has won
+	  			//console.log("BR "+P1BRBC[0]+"BC "+P1BRBC[1])
+	  			if (littlematrix[P1BRBC[0]][P1BRBC[1]] !== "p1") {
+	  				//console.log(littlematrix);
+	  				win_condition_check((P1BRBC[0]+1),(P1BRBC[1]+1)) // check if our player has won
+	  			}else{
+	  			//check if player overturns square
+	  			console.log("overturn check p2")
+	  			overturn_check(P1BRBC[0],P1BRBC[1],"p2")
+	  			}
 	  		}
 	  		player1 = true
 
@@ -304,6 +321,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 						console.log("horizontal victory")
 						console.log("player1 wins square row "+BR+ "column "+BC )
 						winner_show(BR,BC)
+						littlematrix[(BR-1)][(BC-1)]="p1";
 						return;
 
 						}
@@ -313,6 +331,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 						console.log("vertical victory")
 						console.log("player1 wins")
 						winner_show(BR,BC)
+						littlematrix[(BR-1)][(BC-1)]="p1";
 						return;
 						}
 					}
@@ -321,6 +340,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 						console.log("LtopRdown diagonal")
 						console.log("player1 wins")
 						winner_show(BR,BC)
+						littlematrix[(BR-1)][(BC-1)]="p1";
 						return;
 						}
 					} 
@@ -329,6 +349,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 						console.log("Rtop Ldown diagonal")
 						console.log("player1 wins")
 						winner_show(BR,BC)
+						littlematrix[(BR-1)][(BC-1)]="p1";
 						return;
 						}
 					}
@@ -366,6 +387,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 					console.log("horizontal victory")
 					console.log("player2 wins")
 					winner_show(BR,BC)
+					littlematrix[(BR-1)][(BC-1)]="p2";
 					return;
 					}
 				}
@@ -375,6 +397,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 					console.log("vertical victory")
 					console.log("player2 wins")
 					winner_show(BR,BC)
+					littlematrix[(BR-1)][(BC-1)]="p2";
 					return;
 					}
 				}
@@ -383,6 +406,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 					console.log("LtopRdown diagonal")
 					console.log("player2 wins")
 					winner_show(BR,BC)
+					littlematrix[(BR-1)][(BC-1)]="p2";
 					return;
 					}	
 				}
@@ -392,6 +416,7 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 					console.log("Rtop Ldown diagonal")
 					console.log("player2 wins")
 					winner_show(BR,BC)
+					littlematrix[(BR-1)][(BC-1)]="p2";
 					return;
 					}
 				}
@@ -403,12 +428,51 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 		}	
 	} // End player 2 check
 
+	
+
 	// In the case of a DRAW. We announce this and allow the users to play again
 	// check all 9 space
 
 
 
 } // Function win_condition_check END
+
+function overturn_check(BR,BC,P){
+		
+		var overturn_counter=0;
+		for (var x = 3*BR; x <= (3*BR+2); x++) {
+				//console.log("BR "+BR+"BC "+BC+"P "+P)
+
+				if ((matrix[x][(3*BC+0)]) === P && (matrix[x][(3*BC+1)]) === P && (matrix[x][(3*BC+2)]) === P) {
+					overturn_counter+=1;
+					console.log("BR "+BR+"BC "+BC);
+					console.log(overturn_counter);
+					if (overturn_counter>1) {
+						console.log(P +" overturned the square")
+						//winner_show(BR,BC)
+						littlematrix[BR][BC]= P;
+						win_condition_check((BR+1),(BC+1));
+						return;
+						}
+				}
+		}
+		for (var y = 3*BC; y <= (3*BC+2); y++) {
+				if	((matrix[(3*BR+0)][y]) === P && (matrix[(3*BR+1)][y]) === P && (matrix[(3*BR+2)][y]) === P) {
+					overturn_counter+=1;
+					console.log("BR "+BR+"BC "+BC);
+					console.log(overturn_counter);
+					if (overturn_counter>1) {
+					console.log(P + " overturned the square")
+					//winner_show(BR,BC)
+					littlematrix[BR][BC]= P;
+					win_condition_check((BR+1),(BC+1));
+					return;
+					}
+				}
+
+		}
+
+}
 
 
 function winner_show(BR,BC){ 

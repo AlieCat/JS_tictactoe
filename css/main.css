@@ -196,13 +196,17 @@ textarea {
 
     .row {
         width: 100vw;
+        max-width:100vh;
         height: 10vh;
+        max-height:10vw;
   
     }
 
     .cell {
         width: 10vw;
+        max-width: 10vh;
         height: 10vw;
+        max-height: 10vh;
         /*background:rgb(156, 239, 172);*/
         float: left;
         border: 2px solid black;

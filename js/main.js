@@ -120,6 +120,21 @@ function little(dataRow,dataCell){
 	return LRLC;
 }
 
+//create a function that checks if little row, little collumn is full
+function full(dataRow,dataCell){
+	var LR = (dataRow)%3;
+	var LC = (dataCell)%3;
+	for (var i=0; i<=2;i++){
+	if (matrix[3*LR+i][3*LC] === undefined || matrix[3*LR][3*LC+i] === undefined || matrix[3*LR+i][3*LC+i] === undefined){
+		return false;
+	}
+	
+	}
+
+	
+
+}
+
 
 
 // When a user clicks on a cell
@@ -140,18 +155,32 @@ $( ".cell" ).click(function() {
 
 	//create logic that only allows user to place in bc & br
 	if(player1 == true || player1 === 'undefined'){
+		//if BRBC is not already full
+		console.log(full(clickedRow,clickedCell))
+		if (full(clickedRow,clickedCell)== false){
 		P1BRBC= little(clickedRow, clickedCell);
+		}
+		else{
+		console.log('you can go anywhere')
+		P1BRBC=undefined	
+		}
 		//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 	}else if(player1 == false){
+		if (full(clickedRow,clickedCell)== false){
 		P2BRBC= little(clickedRow, clickedCell);
+		}
+		else{
+		console.log('you can go anywhere')
+		P2BRBC=undefined	
+		}
 		//console.log('player2')	
 	}else{console.log('Too many players?')}
 
 	if (typeof P2BRBC === 'undefined'){
 		//console.log('first round you can go anywhere');
-	}//else if( entire BRBC is filled){ you can go anywhere}
+	}//else if(filled()){ you can go anywhere}
 	else{
-		if(player1==true){
+		if(player1==true && P2BRBC !== undefined){
 				//console.log('player2 '+'row '+P2BRBC[0]+'column '+P2BRBC[1]);
 				if(P2BRBC[0] == 0 && clickedRow>2){
 					//console.log("Hey! Stop poking me you chose big row 2 or 3 and p2 chose little row 1");
@@ -179,7 +208,7 @@ $( ".cell" ).click(function() {
 					//console.log('valid entry');
 				}
 		}
-		else if(player1==false){
+		else if(player1==false && P1BRBC !== undefined){
 				//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 				if(P1BRBC[0] == 0 && clickedRow>2){
 					//console.log("Hey! Stop poking me p1 chose little row 0");

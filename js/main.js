@@ -116,6 +116,7 @@ function current_player_show(){
 function little(dataRow,dataCell){
 	var LR = (dataRow)%3;
 	var LC = (dataCell)%3;
+	//console.log(dataCell);
 	var LRLC=[LR,LC]
 	return LRLC;
 }
@@ -125,11 +126,12 @@ function full(dataRow,dataCell){
 	var LR = (dataRow)%3;
 	var LC = (dataCell)%3;
 	for (var i=0; i<=2;i++){
-	if (matrix[3*LR+i][3*LC] === undefined || matrix[3*LR][3*LC+i] === undefined || matrix[3*LR+i][3*LC+i] === undefined){
+	if (typeof  matrix[3*LR+i][3*LC] === 'undefined' || typeof matrix[3*LR][3*LC+i] === 'undefined' || typeof matrix[3*LR+i][3*LC+i] === 'undefined'){
 		return false;
 	}
 	
 	}
+	console.log('true?')
 
 	
 
@@ -158,6 +160,7 @@ $( ".cell" ).click(function() {
 		//if BRBC is not already full
 		console.log(full(clickedRow,clickedCell))
 		if (full(clickedRow,clickedCell)== false){
+		//console.log('p1 bc '+clickedCell);
 		P1BRBC= little(clickedRow, clickedCell);
 		}
 		else{
@@ -167,6 +170,7 @@ $( ".cell" ).click(function() {
 		//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 	}else if(player1 == false){
 		if (full(clickedRow,clickedCell)== false){
+		//console.log("why "+clickedCell);	
 		P2BRBC= little(clickedRow, clickedCell);
 		}
 		else{
@@ -261,7 +265,7 @@ $( ".cell" ).click(function() {
 	  			else{
 	  			//check if player overturns square
 	  			console.log("overturn check p1")
-	  			overturn_check(P2BRBC[0]+1),(P2BRBC[1]+1,"p1")
+	  			overturn_check(P2BRBC[0],P2BRBC[1],"p1")
 	  			}	
 
 	  		}
@@ -472,7 +476,7 @@ function overturn_check(BR,BC,P){
 		for (var x = 3*BR; x <= (3*BR+2); x++) {
 				//console.log("BR "+BR+"BC "+BC+"P "+P)
 
-				if ((matrix[x][(3*BC+0)]) === P && (matrix[x][(3*BC+1)]) === P && (matrix[x][(3*BC+2)]) === P) {
+				if ((matrix[x][(3*BC+0)]) == P && (matrix[x][(3*BC+1)]) == P && (matrix[x][(3*BC+2)]) == P) {
 					overturn_counter+=1;
 					console.log("BR "+BR+"BC "+BC);
 					console.log(overturn_counter);
@@ -486,7 +490,7 @@ function overturn_check(BR,BC,P){
 				}
 		}
 		for (var y = 3*BC; y <= (3*BC+2); y++) {
-				if	((matrix[(3*BR+0)][y]) === P && (matrix[(3*BR+1)][y]) === P && (matrix[(3*BR+2)][y]) === P) {
+				if	((matrix[(3*BR+0)][y]) == P && (matrix[(3*BR+1)][y]) == P && (matrix[(3*BR+2)][y]) == P) {
 					overturn_counter+=1;
 					console.log("BR "+BR+"BC "+BC);
 					console.log(overturn_counter);

@@ -51,6 +51,21 @@ function createBoard(v){
         token.className = "token";
         row.appendChild(cell);
         cell.appendChild(token);
+
+        //for adding a number system to the macro board
+        // where V is the total number of rows/columns 
+        // right now v=9 but v could be 27
+        // 
+        // looks like:
+        //   1 2 3
+        // 1 x x x
+        // 2 x x x
+        // 3 x x x
+        //
+        // I should add some code that says divide by 3 until
+        // there are 3 squares added to each class?
+
+
             if(i< (v/3)) {
             	cell.className += " BR1";
     		}
@@ -158,7 +173,7 @@ $( ".cell" ).click(function() {
 	//create logic that only allows user to place in bc & br
 	if(player1 == true || player1 === 'undefined'){
 		//if BRBC is not already full
-		console.log(full(clickedRow,clickedCell))
+		//console.log(full(clickedRow,clickedCell))
 		if (full(clickedRow,clickedCell)== false){
 		//console.log('p1 bc '+clickedCell);
 		P1BRBC= little(clickedRow, clickedCell);
@@ -247,11 +262,13 @@ $( ".cell" ).click(function() {
 	if (active === true && valid===true){ // user clicks an empty cell
 
 		if (player1 === true) {  // I'm breaking the DRY rule here (dont repeat yourself) sorry!
+			//retreive some data?
 			token.css("display", "block") // CSS and classes for occupied cell styles
 	  		token.addClass("snowy")
 	  		token.css("border", "none")
 	  		token.addClass("expandOpen")
 	  		matrix[clickedRow][clickedCell] = "p1" // to show this matrix cell is now occupied
+	  		//send this variable to the websocket
 	  		
 
 	  		counter++ // add one to the turn counter
@@ -351,8 +368,8 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 					//console.log("matrx[x] "+ x+"martix[y] "+y);
 					if ((matrix[x][(count2+0)]) === "p1" && (matrix[x][(count2+1)]) === "p1" && (matrix[x][(count2+2)]) === "p1") { // If our cell has been 'tagged' p1 given x is (e.g 0) then: x0y0, x0y1, x0y2 would mean player one has 3 horizontal cells in a line = victory!
 						if (player1 === true){
-						console.log("horizontal victory")
-						console.log("player1 wins square row "+BR+ "column "+BC )
+						//console.log("horizontal victory")
+						//console.log("player1 wins square row "+BR+ "column "+BC )
 						winner_show(BR,BC)
 						littlematrix[(BR-1)][(BC-1)]="p1";
 						return;
@@ -361,8 +378,8 @@ function win_condition_check(BR,BC){ //tion, sorry again. I've used a lot of con
 					} 
 					else if	(   (matrix[(count+0)][y]) === "p1" && (matrix[(count+1)][y]) === "p1" && (matrix[(count+2)][y]) === "p1") { // Repeated for other conditions
 						if (player1 === true){
-						console.log("vertical victory")
-						console.log("player1 wins")
+						//console.log("vertical victory")
+						//console.log("player1 wins")
 						winner_show(BR,BC)
 						littlematrix[(BR-1)][(BC-1)]="p1";
 						return;

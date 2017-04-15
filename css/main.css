@@ -213,15 +213,15 @@ textarea {
 
     }
     /*change color of every other cell*/
-    .BR1.BC1{background:#42a7f4}
-    .BR1.BC2{background:#a089af}
-    .BR1.BC3{background:#42a7f4}
-    .BR2.BC1{background:#a089af}
-    .BR2.BC2{background:#42a7f4}
-    .BR2.BC3{background:#a089af}
-    .BR3.BC1{background:#42a7f4}
-    .BR3.BC2{background:#a089af}
-    .BR3.BC3{background:#42a7f4}
+    .BR1.BC1, .BR1.BC3,.BR2.BC2,.BR3.BC1, .BR3.BC3{background:#42a7f4}
+    .BR1.BC2, .BR2.BC1,.BR2.BC3, .BR3.BC2{background:#80c3f7}
+
+    /*Draw the Macro Board*/
+    .row3 > .cell{border-top:15px solid black;}
+    .row5 > .cell{border-bottom: 15px solid black;}
+    .cell3{border-left:15px solid black;}
+    .cell5{border-right:15px solid black;}
+
 
     .cell:hover {
         

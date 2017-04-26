@@ -198,15 +198,16 @@ textarea {
        overflow:hidden; 
        width: 100vw;
         max-width:100vh;
+       min-width:100vw;
         height: 10vh;
         max-height:10vw;
   
     }
 
     .cell {
-        width: 10vw;
+        width: 9vw;
         max-width: 10vh;
-        height: 10vw;
+        height: 9vw;
         max-height: 10vh;
         /*background:rgb(156, 239, 172);*/
         float: left;

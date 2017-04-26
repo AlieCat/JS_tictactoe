@@ -195,7 +195,7 @@ textarea {
     }
 
     .row {
-       overflow:inherit; 
+       overflow:hidden; 
        width: 100vw;
         max-width:100vh;
         height: 10vh;
@@ -219,7 +219,7 @@ textarea {
 
     /*Draw the Macro Board*/
     .row3 > .cell{margin-top:1vw;}
-    .row5 > .cell{margin-bottom:1vw;}
+    .row6 > .cell{margin-top:1vw;}
     .cell3{margin-left:1vw;}
     .cell5{margin-right:1vw;}
 

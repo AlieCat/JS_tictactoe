@@ -218,10 +218,10 @@ textarea {
     .BR1.BC2, .BR2.BC1,.BR2.BC3, .BR3.BC2{background:#80c3f7}
 
     /*Draw the Macro Board*/
-    .row3 > .cell{margin-top:5vw solid black;}
-    .row5 > .cell{margin-bottom: 5vw solid black;}
-    .cell3{margin-left:5vw solid black;}
-    .cell5{margin-right:5vw solid black;}
+    .row3 > .cell{margin-top:5vw;}
+    .row5 > .cell{margin-bottom: 5vw;}
+    .cell3{margin-left:5vw;}
+    .cell5{margin-right:5vw;}
 
 
     .cell:hover {

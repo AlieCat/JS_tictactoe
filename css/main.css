@@ -195,7 +195,8 @@ textarea {
     }
 
     .row {
-        width: 100vw;
+       overflow:auto; 
+       width: 100vw;
         max-width:100vh;
         height: 10vh;
         max-height:10vw;
@@ -217,10 +218,10 @@ textarea {
     .BR1.BC2, .BR2.BC1,.BR2.BC3, .BR3.BC2{background:#80c3f7}
 
     /*Draw the Macro Board*/
-    .row3 > .cell{border-top:15px solid black;}
-    .row5 > .cell{border-bottom: 15px solid black;}
-    .cell3{border-left:15px solid black;}
-    .cell5{border-right:15px solid black;}
+    .row3 > .cell{margin-top:5vw solid black;}
+    .row5 > .cell{margin-bottom: 5vw solid black;}
+    .cell3{margin-left:5vw solid black;}
+    .cell5{margin-right:5vw solid black;}
 
 
     .cell:hover {

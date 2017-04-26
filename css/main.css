@@ -220,7 +220,8 @@ textarea {
 
     /*Draw the Macro Board*/
     .row3 > .cell{margin-top:1vw;}
-    .row6 > .cell{margin-top:1vw;}
+    .row6 > .cell{margin-top:1vw;
+                  height:10vw !important;}
     .cell3{margin-left:1vw;}
     .cell5{margin-right:1vw;}
 

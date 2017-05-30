@@ -195,17 +195,19 @@ textarea {
     }
 
     .row {
-        width: 100vw;
+       overflow:hidden; 
+       width: 100vw;
         max-width:100vh;
+       min-width:100vw;
         height: 10vh;
         max-height:10vw;
   
     }
 
     .cell {
-        width: 10vw;
+        width: 9vw;
         max-width: 10vh;
-        height: 10vw;
+        height: 9vw;
         max-height: 10vh;
         /*background:rgb(156, 239, 172);*/
         float: left;
@@ -217,10 +219,11 @@ textarea {
     .BR1.BC2, .BR2.BC1,.BR2.BC3, .BR3.BC2{background:#80c3f7}
 
     /*Draw the Macro Board*/
-    .row3 > .cell{border-top:15px solid black;}
-    .row5 > .cell{border-bottom: 15px solid black;}
-    .cell3{border-left:15px solid black;}
-    .cell5{border-right:15px solid black;}
+    .row3 > .cell{margin-top:1vw;}
+    .row6 > .cell{margin-top:1vw;
+                  height:10vw !important;}
+    .cell3{margin-left:1vw;}
+    .cell5{margin-right:1vw;}
 
 
     .cell:hover {

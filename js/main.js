@@ -235,7 +235,7 @@ $( ".cell" ).click(function() {
 				}else if(P1BRBC[0] == 1 && (clickedRow<3  ||  clickedRow>5)){
 					//console.log("Hey! Stop poking me p1 chose little row 1");
 					valid=false;
-				}else if(P1BRBC[0] == 2 && clickedRow<6){
+				}else if(P1BRBC[0] == 2 && clickedRow<5){
 					//console.log("Hey! Stop poking me p1 chose little row 2");
 					valid=false;
 				}else if(P1BRBC[1] == 0 && clickedCell>2){
@@ -244,7 +244,7 @@ $( ".cell" ).click(function() {
 				}else if(P1BRBC[1] == 1 && (clickedCell<3  ||  clickedCell>5)){
 					//console.log("Hey! Stop poking me lc2");
 					valid=false;
-				}else if(P1BRBC[1] == 2 && clickedCell<6){
+				}else if(P1BRBC[1] == 2 && clickedCell<5){
 					//console.log("Hey! Stop poking me lc3");
 					valid=false;
 				}

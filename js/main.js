@@ -209,6 +209,7 @@ $( ".cell" ).click(function() {
 			var x = document.getElementsByClassName(classNameBRBC);
 			var i;
 			for (i = 0; i < x.length; i++) {
+			//instead of changing the background add a class that changes the background
 			x[i].style.background = "#ea7cf4";}
 		}
 		if(P1BRBC[0]==0 && P1BRBC[1]==0)
@@ -233,9 +234,11 @@ $( ".cell" ).click(function() {
 	else{
 		//reset board background
 		function reset(){
+			//only change color of squares that habe not been won
 			var x = document.getElementsByClassName("cell");
 			var i;
 			for (i = 0; i < x.length; i++) {
+				//instead remove highlight class
 			x[i].style.background = "#42a7f4";}
 		}
 		if(player1==true && P2BRBC !== undefined){
@@ -269,6 +272,7 @@ $( ".cell" ).click(function() {
 						var x = document.getElementsByClassName(classNameBRBC);
 						var i;
 						for (i = 0; i < x.length; i++) {
+						//instead of changing the background add a class that changes the background
 						x[i].style.background = "#ea7cf4";}
 					}
 					if(P1BRBC[0]==0 && P1BRBC[1]==0)
@@ -324,6 +328,7 @@ $( ".cell" ).click(function() {
 						var x = document.getElementsByClassName(classNameBRBC);
 	    				var i;
 	    				for (i = 0; i < x.length; i++) {
+	    				//instead of changing the background add a class that changes the background
 	        			x[i].style.background = "#a67cf4";}
 					}
 					if(P2BRBC[0]==0 && P2BRBC[1]==0)

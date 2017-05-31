@@ -177,16 +177,23 @@ $( ".cell" ).click(function() {
 		if (full(clickedRow,clickedCell)== false){
 		//console.log('p1 bc '+clickedCell);
 		P1BRBC= little(clickedRow, clickedCell);
+		//console.log(P1BRBC[0]);
+
+
 		}
 		else{
 		console.log('you can go anywhere')
 		P1BRBC=undefined	
 		}
+
+
 		//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 	}else if(player1 == false){
 		if (full(clickedRow,clickedCell)== false){
+
 		//console.log("why "+clickedCell);	
 		P2BRBC= little(clickedRow, clickedCell);
+
 		}
 		else{
 		console.log('you can go anywhere')
@@ -197,9 +204,42 @@ $( ".cell" ).click(function() {
 
 	if (typeof P2BRBC === 'undefined'){
 		//console.log('first round you can go anywhere');
+		//highlight
+		function highlight1(classNameBRBC){
+			var x = document.getElementsByClassName(classNameBRBC);
+			var i;
+			for (i = 0; i < x.length; i++) {
+			x[i].style.background = "#ea7cf4";}
+		}
+		if(P1BRBC[0]==0 && P1BRBC[1]==0)
+		{ highlight1("BR1 BC1");}
+		else if(P1BRBC[0]==1 && P1BRBC[1]==0)
+		{ highlight1("BR2 BC1");}
+		else if(P1BRBC[0]==2 && P1BRBC[1]==0)
+		{ highlight1("BR3 BC1");}
+		else if(P1BRBC[0]==0 && P1BRBC[1]==1)
+		{ highlight1("BR1 BC2");}
+		else if(P1BRBC[0]==1 && P1BRBC[1]==1)
+		{ highlight1("BR2 BC2");}
+		else if(P1BRBC[0]==2 && P1BRBC[1]==1)
+		{ highlight1("BR3 BC2");}
+		else if(P1BRBC[0]==0 && P1BRBC[1]==2)
+		{ highlight1("BR1 BC3");}
+		else if(P1BRBC[0]==1 && P1BRBC[1]==2)
+		{ highlight1("BR2 BC3");}
+		else if(P1BRBC[0]==2 && P1BRBC[1]==2)
+		{ highlight1("BR3 BC3");}
 	}//else if(filled()){ you can go anywhere}
 	else{
+		//reset board background
+		function reset(){
+			var x = document.getElementsByClassName("cell");
+			var i;
+			for (i = 0; i < x.length; i++) {
+			x[i].style.background = "#42a7f4";}
+		}
 		if(player1==true && P2BRBC !== undefined){
+
 				//console.log('player2 '+'row '+P2BRBC[0]+'column '+P2BRBC[1]);
 				if(P2BRBC[0] == 0 && clickedRow>2){
 					//console.log("Hey! Stop poking me you chose big row 2 or 3 and p2 chose little row 1");
@@ -207,7 +247,7 @@ $( ".cell" ).click(function() {
 				}else if(P2BRBC[0] == 1 && (clickedRow<3  ||  clickedRow>5)){
 					//console.log("Hey! Stop poking me you clicked big Row 1 or 3 and p1 chose little row 1");
 					valid=false;
-				}else if(P2BRBC[0] == 2 && clickedRow<5){
+				}else if(P2BRBC[0] == 2 && clickedRow<6){
 					//console.log("Hey! Stop poking me");
 					valid=false;
 				}else if(P2BRBC[1] == 0 && clickedCell>3){
@@ -216,7 +256,7 @@ $( ".cell" ).click(function() {
 				}else if(P2BRBC[1] == 1 && (clickedCell<3  ||  clickedCell>5)){
 					//console.log("Hey! Stop poking me");
 					valid=false
-				}else if(P2BRBC[1] == 2 && clickedCell<5){
+				}else if(P2BRBC[1] == 2 && clickedCell<6){
 					//console.log("Hey! Stop poking me");
 					valid=false;
 				}
@@ -224,10 +264,36 @@ $( ".cell" ).click(function() {
 					//console.log(P2BRBC[0]);
 					//console.log(P2BRBC[1]);
 					valid=true;
+					reset();
+					function highlight1(classNameBRBC){
+						var x = document.getElementsByClassName(classNameBRBC);
+						var i;
+						for (i = 0; i < x.length; i++) {
+						x[i].style.background = "#ea7cf4";}
+					}
+					if(P1BRBC[0]==0 && P1BRBC[1]==0)
+					{ highlight1("BR1 BC1");}
+					else if(P1BRBC[0]==1 && P1BRBC[1]==0)
+					{ highlight1("BR2 BC1");}
+					else if(P1BRBC[0]==2 && P1BRBC[1]==0)
+					{ highlight1("BR3 BC1");}
+					else if(P1BRBC[0]==0 && P1BRBC[1]==1)
+					{ highlight1("BR1 BC2");}
+					else if(P1BRBC[0]==1 && P1BRBC[1]==1)
+					{ highlight1("BR2 BC2");}
+					else if(P1BRBC[0]==2 && P1BRBC[1]==1)
+					{ highlight1("BR3 BC2");}
+					else if(P1BRBC[0]==0 && P1BRBC[1]==2)
+					{ highlight1("BR1 BC3");}
+					else if(P1BRBC[0]==1 && P1BRBC[1]==2)
+					{ highlight1("BR2 BC3");}
+					else if(P1BRBC[0]==2 && P1BRBC[1]==2)
+					{ highlight1("BR3 BC3");}
 					//console.log('valid entry');
 				}
 		}
 		else if(player1==false && P1BRBC !== undefined){
+				
 				//console.log('player1 '+'row '+P1BRBC[0]+'column '+P1BRBC[1])
 				if(P1BRBC[0] == 0 && clickedRow>2){
 					//console.log("Hey! Stop poking me p1 chose little row 0");
@@ -235,7 +301,7 @@ $( ".cell" ).click(function() {
 				}else if(P1BRBC[0] == 1 && (clickedRow<3  ||  clickedRow>5)){
 					//console.log("Hey! Stop poking me p1 chose little row 1");
 					valid=false;
-				}else if(P1BRBC[0] == 2 && clickedRow<5){
+				}else if(P1BRBC[0] == 2 && clickedRow<6){
 					//console.log("Hey! Stop poking me p1 chose little row 2");
 					valid=false;
 				}else if(P1BRBC[1] == 0 && clickedCell>2){
@@ -244,7 +310,7 @@ $( ".cell" ).click(function() {
 				}else if(P1BRBC[1] == 1 && (clickedCell<3  ||  clickedCell>5)){
 					//console.log("Hey! Stop poking me lc2");
 					valid=false;
-				}else if(P1BRBC[1] == 2 && clickedCell<5){
+				}else if(P1BRBC[1] == 2 && clickedCell<6){
 					//console.log("Hey! Stop poking me lc3");
 					valid=false;
 				}
@@ -252,6 +318,33 @@ $( ".cell" ).click(function() {
 					//console.log('row '+ P1BRBC[0]);
 					//console.log('column '+P1BRBC[1]);
 					valid=true;
+					reset();
+					//highlight where you can go
+					function highlight(classNameBRBC){
+						var x = document.getElementsByClassName(classNameBRBC);
+	    				var i;
+	    				for (i = 0; i < x.length; i++) {
+	        			x[i].style.background = "#a67cf4";}
+					}
+					if(P2BRBC[0]==0 && P2BRBC[1]==0)
+					{ highlight("BR1 BC1");
+	        		}
+					else if(P2BRBC[0]==1 && P2BRBC[1]==0)
+					{ highlight("BR2 BC1");}
+					else if(P2BRBC[0]==2 && P2BRBC[1]==0)
+					{ highlight("BR3 BC1");}
+					else if(P2BRBC[0]==0 && P2BRBC[1]==1)
+					{ highlight("BR1 BC2");}
+					else if(P2BRBC[0]==1 && P2BRBC[1]==1)
+					{ highlight("BR2 BC2");}
+					else if(P2BRBC[0]==2 && P2BRBC[1]==1)
+					{ highlight("BR3 BC2");}
+					else if(P2BRBC[0]==0 && P2BRBC[1]==2)
+					{ highlight("BR1 BC3");}
+					else if(P2BRBC[0]==1 && P2BRBC[1]==2)
+					{ highlight("BR2 BC3");}
+					else if(P2BRBC[0]==2 && P2BRBC[1]==2)
+					{ highlight("BR3 BC3");}
 					//console.log('valid entry');
 				}
 		}

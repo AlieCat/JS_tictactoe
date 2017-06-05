@@ -218,6 +218,9 @@ textarea {
     .BR1.BC1, .BR1.BC3,.BR2.BC2,.BR3.BC1, .BR3.BC3{background:#42a7f4}
     .BR1.BC2, .BR2.BC1,.BR2.BC3, .BR3.BC2{background:#80c3f7}
 
+    .highlight{background: #ea7cf4 !important;}
+    .highlight1{background: #a67cf4 !important;}
+
     /*Draw the Macro Board*/
     .row3 > .cell{margin-top:1vw;}
     .row6 > .cell{margin-top:1vw;

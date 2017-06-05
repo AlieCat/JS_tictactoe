@@ -210,7 +210,8 @@ $( ".cell" ).click(function() {
 			var i;
 			for (i = 0; i < x.length; i++) {
 			//instead of changing the background add a class that changes the background
-			x[i].style.background = "#ea7cf4";}
+			x[i].className +=' highlight';
+			}
 		}
 		if(P1BRBC[0]==0 && P1BRBC[1]==0)
 		{ highlight1("BR1 BC1");}
@@ -238,8 +239,14 @@ $( ".cell" ).click(function() {
 			var x = document.getElementsByClassName("cell");
 			var i;
 			for (i = 0; i < x.length; i++) {
-				//instead remove highlight class
-			x[i].style.background = "#42a7f4";}
+				if ($(x[i]).hasClass('highlight')){
+					//instead remove highlight class
+					$(x[i]).removeClass('highlight');
+				}
+				else if ($(x[i]).hasClass('highlight1')){
+					$(x[i]).removeClass('highlight1');
+				}
+			}
 		}
 		if(player1==true && P2BRBC !== undefined){
 
@@ -273,7 +280,9 @@ $( ".cell" ).click(function() {
 						var i;
 						for (i = 0; i < x.length; i++) {
 						//instead of changing the background add a class that changes the background
-						x[i].style.background = "#ea7cf4";}
+						//x[i].style.background = "#ea7cf4";
+						x[i].className +=' highlight';
+						}
 					}
 					if(P1BRBC[0]==0 && P1BRBC[1]==0)
 					{ highlight1("BR1 BC1");}
@@ -329,7 +338,9 @@ $( ".cell" ).click(function() {
 	    				var i;
 	    				for (i = 0; i < x.length; i++) {
 	    				//instead of changing the background add a class that changes the background
-	        			x[i].style.background = "#a67cf4";}
+	    				x[i].className +=' highlight1';
+	        			//x[i].style.background = "#a67cf4";
+	        			}
 					}
 					if(P2BRBC[0]==0 && P2BRBC[1]==0)
 					{ highlight("BR1 BC1");
